@@ -1,0 +1,27 @@
+replicaCount: 2
+
+image:
+  tag: "staging"
+
+ingress:
+  hosts:
+    - host: staging-myapp.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: myapp-staging-tls
+      hosts:
+        - staging-myapp.example.com
+
+resources:
+  limits:
+    cpu: 250m
+    memory: 256Mi
+  requests:
+    cpu: 50m
+    memory: 64Mi
+
+config:
+  NODE_ENV: staging
+  LOG_LEVEL: debug
